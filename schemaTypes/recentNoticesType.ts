@@ -29,77 +29,42 @@ export const recentNoticesType = defineType({
     }),
    
     defineField({
-      name: 'content',
-      title: 'Notice Content',
-      type: 'array',
-      of: [
-        {
-          type: 'block',
-          styles: [
-            { title: 'Normal', value: 'normal' },
-            { title: 'H1', value: 'h1' },
-            { title: 'H2', value: 'h2' },
-            { title: 'H3', value: 'h3' },
-            { title: 'H4', value: 'h4' },
-            { title: 'Quote', value: 'blockquote' },
-          ],
-          lists: [{ title: 'Bullet', value: 'bullet' }],
-          marks: {
-            decorators: [
-              { title: 'Strong', value: 'strong' },
-              { title: 'Emphasis', value: 'em' },
-              { title: 'Underline', value: 'underline' },
-              { title: 'Strike-through', value: 'strike-through' },
-              { title: 'Code', value: 'code' },
-            ],
-            annotations: [
-              {
-                title: 'URL',
-                name: 'link',
-                type: 'object',
-                fields: [
-                  {
-                    title: 'URL',
-                    name: 'href',
-                    type: 'url',
-                  },
-                ],
-              },
-            ],
-          },
-        },
-      ],
-      validation: Rule => Rule.required().error('Content is required.')
-    }),
+        name: 'notices',
+        title: 'Recent Notices',
+        type: 'array',
+        of: [{ type: 'block' }],
+        validation: Rule => Rule.required().error('Notice is required.')
+      }),
 
     defineField({
-      name: 'photos',
-      title: 'Notice Photos',
-      type: 'array',
-      of: [
-        {
-          type: 'image',
-          options: {
-            hotspot: true,
-          },
+        name: 'photos',
+        title: 'Recent Notices',
+        type: 'array',
+        of: [
+          {
+            type: 'image',
+            
+          }
+        ],
+        options: {
+          layout: 'grid',
         },
-      ],
-      validation: Rule => Rule.max(10).error('You can upload up to 10 photos.')
-    }),
+        validation: Rule => Rule.required().min(1).error('At least one notice must be added.')
+      }),
   ],
 
   preview: {
     select: {
       title: 'title',
-      subtitle: 'slug.current', 
-      media: 'photos.0' 
+      subtitle: 'slug.current',
+     
     },
     prepare(selection) {
-      const { title, subtitle, media } = selection;
+      const { title, subtitle} = selection;
       return {
         title,
         subtitle: `Slug: ${subtitle}`, 
-        media,
+      
       };
     },
   },
