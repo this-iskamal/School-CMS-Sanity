@@ -19,6 +19,12 @@ export const teacherType = defineType({
       type: 'string',
       validation: Rule => Rule.required().error('Address is required.')
     }),
+    defineField({
+      name: 'postition',
+      title: 'Position',
+      type: 'string',
+      validation: Rule => Rule.required().error('Position is required.')
+    }),
   
     defineField({
       name: 'contact',
